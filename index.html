@@ -20,11 +20,6 @@
                 <label>Regional Context</label>
                 <select id="countrySelect" onchange="updateCities()">
                     <option value="" disabled selected>Select Country</option>
-                    <option value="USA">United States</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="India">India</option>
-                    <option value="UAE">United Arab Emirates</option>
                 </select>
             </div>
 
@@ -40,6 +35,7 @@
             <div class="main-info">
                 <h1 id="cityName">---</h1>
                 <p id="condition">System Ready</p>
+                <p id="feelsLike" class="feels-like">---</p>
             </div>
 
             <div class="metrics-grid">
@@ -50,6 +46,15 @@
                 <div class="metric-card">
                     <span class="label">Fahrenheit</span>
                     <h3 id="tempF">--°</h3>
+                </div>
+            </div>
+
+            <div class="additional-info">
+                <div class="info-item">
+                    <span id="humidity">Humidity: --</span>
+                </div>
+                <div class="info-item">
+                    <span id="windSpeed">Wind: --</span>
                 </div>
             </div>
             

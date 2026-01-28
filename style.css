@@ -102,8 +102,30 @@ select option {
     transition: opacity 0.4s ease;
 }
 
-.main-info h1 { font-size: 2.8rem; letter-spacing: -1.5px; }
-.main-info p { color: var(--accent); font-weight: 500; margin-top: 5px; }
+.main-info h1 {
+    font-size: 3.2rem;
+    letter-spacing: -1.5px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.main-info p {
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 5px;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+}
+
+.feels-like {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    font-weight: 400;
+}
 
 .metrics-grid {
     display: grid;
@@ -121,6 +143,27 @@ select option {
 
 .metric-card .label { font-size: 0.75rem; color: var(--text-dim); display: block; margin-bottom: 5px; }
 .metric-card h3 { font-size: 2.2rem; }
+
+.additional-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-item {
+    text-align: center;
+    flex: 1;
+}
+
+.info-item span {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    display: block;
+}
 
 .status-bar {
     display: flex;
