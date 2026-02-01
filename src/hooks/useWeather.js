@@ -32,6 +32,8 @@ export const useWeather = () => {
 
         setIsSyncing(true);
 
+        // --- SUB-REQUEST DEFINITIONS ---
+
         const geocode = async () => {
             const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)},${encodeURIComponent(country)}&limit=1&appid=${API_KEY}`;
             const res = await fetch(url);
@@ -50,7 +52,6 @@ export const useWeather = () => {
         };
 
         const wttrFetch = async (coords) => {
-            // Using coordinates for wttr.in is 100% precise
             const query = coords ? `${coords.lat},${coords.lon}` : `${city},${country}`;
             const url = `https://wttr.in/${encodeURIComponent(query)}?format=j1`;
             const res = await fetch(url);
@@ -59,34 +60,36 @@ export const useWeather = () => {
             return processWttrData(data, city, country);
         };
 
+        // --- HYPER-PARALLEL RACE ---
+
         try {
-            // Step 1: Geocoding (Deep-Lookup)
-            let coords = null;
-            try {
-                coords = await geocode();
-            } catch (e) {
-                console.warn("Geocoding failed, falling back to name-based race", e);
-            }
+            const raceTargets = [];
 
-            // Step 2: Parallel API Racing
-            const primaryPromise = coords ? owmFetch(coords) : Promise.reject("No Coords");
+            // 1. FAST PATH: Immediate name-based fetch (⚡ Speed focus)
+            raceTargets.push(wttrFetch(null));
 
-            const fallbackPromise = new Promise((resolve, reject) => {
-                setTimeout(async () => {
-                    try { resolve(await wttrFetch(coords)); }
-                    catch (e) { reject(e); }
-                }, coords ? 300 : 0); // Less stagger if no coords (urgent)
-            });
+            // 2. DEEP PATH: Geocode then coordinate-fetch (🎯 Accuracy focus)
+            const deepAccuracy = async () => {
+                const coords = await geocode();
+                // We race OWM-Coords and Wttr-Coords once we have the pin
+                return await Promise.any([
+                    owmFetch(coords),
+                    wttrFetch(coords)
+                ]);
+            };
+            raceTargets.push(deepAccuracy());
 
-            // Race!
-            const fastestSuccessfulData = await Promise.any([primaryPromise, fallbackPromise]);
+            // THE RACE: Whichever succeeds first wins.
+            // If the fast path succeeds in 200ms, it renders instantly.
+            // If it fails or is slow, the deep path provides the result.
+            const fastestSuccessfulData = await Promise.any(raceTargets);
 
             saveToPersistentCache(cacheKey, fastestSuccessfulData);
             setWeatherData(fastestSuccessfulData);
             setStatus(`⚡ Accuracy Sync Active: ${fastestSuccessfulData.updateTime}`);
 
         } catch (error) {
-            console.error("Critical failure in API race:", error);
+            console.error("Critical failure in hyper-race:", error);
             setStatus("Data accuracy not found for this node");
         } finally {
             setIsSyncing(false);
@@ -134,5 +137,10 @@ export const useWeather = () => {
         };
     };
 
-    return { weatherData, status, isSyncing, fetchWeather };
+    const clearWeather = () => {
+        setWeatherData(null);
+        setStatus("Awaiting Selection");
+    };
+
+    return { weatherData, status, isSyncing, fetchWeather, clearWeather };
 };
