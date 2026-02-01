@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="sunGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcc00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff9900;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="0.5" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Sun -->
+  <circle cx="20" cy="12" r="8" fill="url(#sunGradient)" />
+  <!-- Cloud -->
+  <path d="M10 24c-3.3 0-6-2.7-6-6 0-2.8 1.9-5.1 4.5-5.8C9.4 9.1 12.5 7 16 7c3.9 0 7.1 2.6 8 6.1C27.4 13.6 30 16.5 30 20c0 3.3-2.7 6-6 6H10z" fill="#ffffff" filter="url(#shadow)" opacity="0.9" />
+</svg>
