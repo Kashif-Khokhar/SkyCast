@@ -2,8 +2,6 @@
 
 **SkyCast Elite** is a state-of-the-art weather intelligence application built with **React 19**, **Vite**, and **Tailwind CSS 4**. It combines a premium "Elite" glassmorphic aesthetic with industry-leading data accuracy and "lightning-speed" performance.
 
-![SkyCast Elite Hero Image](https://raw.githubusercontent.com/Kashif-Khokhar/SkyCast/main/public/favicon.svg) <!-- Note: Replace with actual screenshot link if available -->
-
 ## 💎 Premium Experience
 
 - **Dynamic Weather Backgrounds**: The entire UI atmosphere shifts instantly based on current weather conditions (Clear, Clouds, Rain, Thunder, etc.).
