@@ -35,7 +35,10 @@ function App() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-6 font-sans antialiased text-white selection:bg-accent/30">
-      <Background condition={weatherData?.condition} />
+      <Background 
+        condition={weatherData?.condition} 
+        mainCondition={weatherData?.mainCondition} 
+      />
       
       <AnimatePresence>
         <motion.div 

@@ -4,25 +4,31 @@
 
 ## 💎 The Elite Experience
 
-- **Glassmorphism v2**: A sophisticated UI featuring multi-layered backdrop blurs, vibrant dynamic borders, and silky-smooth animations powered by **Framer Motion**.
-- **Dynamic Atmospheric Engine**: The entire UI environment shifts in real-time based on live weather conditions (Clear, Clouds, Rain, Thunder, etc.).
-- **Searchable Autocomplete**: A high-performance, searchable selection system designed to navigate world-scale datasets (100,000+ entries) with zero latency.
-- **Responsive Precision**: Fully optimized for a seamless experience across mobile, tablet, and high-resolution desktop displays.
+- **Immersive Weather Cast**: A cinematic background system that shifts in real-time based on live weather. Every condition (Clear, Clouds, Rain, Snow, Thunder) features high-resolution atmospheric imagery.
+- **Cinematic Motion Engine**: Every weather state feels alive with dedicated motion effects:
+    - **Sun Shimmer**: Dynamic lens flares and brightness pulses for Sunny weather.
+    - **Cloud Drift**: Soft, slow-moving cloud textures for Overcast days.
+    - **Live Rain & Snow**: Real-time particles and textures that bring the atmosphere into the UI.
+- **Glassmorphism v2**: A sophisticated UI featuring multi-layered backdrop blurs, vibrant dynamic borders, and silky-smooth **Framer Motion** transitions.
+- **Opening Atmosphere**: A stunning world-scale cosmic view that loads immediately upon opening the portal.
 
 ## ⚡ Technical Architecture & Performance
 
-SkyCast Elite is engineered for maximum throughput and data integrity:
+SkyCast Elite is engineered for maximum throughput and visual stability:
 
 ### 🌍 Exhaustive Global Sync (On-Demand)
-Unlike traditional apps, SkyCast uses an **On-Demand Sync** architecture. It fetches the complete, exhaustive list of cities for any country only when needed, ensuring 100% data coverage (from major metropolises to small towns) without bloating the initial load.
+Unlike traditional apps, SkyCast uses an **On-Demand Sync** architecture. It fetches the complete, exhaustive list of cities (100,000+ nodes) for any region only when needed, ensuring total global coverage with zero initial overhead.
+
+### 🎭 Elite Transmissions (Cross-Fade)
+Features a sophisticated **Persistent Base Layer** and cinematic cross-fade engine. This ensures that transitions between weather states are buttery smooth, with no black flickers or visual interruptions.
 
 ### 🎯 Hyper-Parallel API Racing
-To achieve **100% data parity with Google Weather**, SkyCast initiates simultaneous, parallel races between multiple high-fidelity sources (**OpenWeatherMap** and **wttr.in**). The first successful response is rendered instantly, eliminating "waiting for timeout" delays.
+To achieve **100% data parity with Google Weather**, SkyCast initiates simultaneous races between high-fidelity sources (**OpenWeatherMap** and **wttr.in**). The first successful response is rendered instantly.
 
 ### 🏎️ Stale-While-Revalidate (SWR) Performance
-- **Instant Boot**: Displays cached weather data in **< 50ms**.
-- **Background Refresh**: Transparent background syncing ensures data is always current without interrupting the user.
-- **Persistent Caching**: Uses optimized `localStorage` indexing for all global nodes and historical weather data.
+- **Instant Boot**: Displays cached global nodes in **< 50ms**.
+- **Region-Aware Reset**: Automatically clears previous data and restores the "Opening Atmosphere" when switching global regions for maximum accuracy.
+- **Persistent Caching**: Optimized `localStorage` indexing for all global nodes and historical weather data.
 
 ## 🛠️ Tech Stack
 

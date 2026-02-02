@@ -1,11 +1,73 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #00d2ff;
+  --color-accent: #38bdf8;
   --color-success: #00ff88;
   --color-card: #0f172a;
 
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@keyframes rain {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100px 500px;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-10%);
+    opacity: 0.1;
+  }
+
+  to {
+    transform: translateX(10%);
+    opacity: 0.2;
+  }
+}
+
+@keyframes snow {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 200px 800px;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    filter: brightness(1) contrast(1);
+  }
+
+  50% {
+    filter: brightness(1.1) contrast(1.05);
+  }
+
+  100% {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+.animate-rain {
+  animation: rain 1s linear infinite;
+}
+
+.animate-drift {
+  animation: drift 60s ease-in-out infinite alternate;
+}
+
+.animate-snow {
+  animation: snow 3s linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 10s ease-in-out infinite;
 }
 
 @layer base {
@@ -16,7 +78,6 @@
 
   body {
     margin: 0;
-    min-height: 100vh;
     background: radial-gradient(circle at top right, #1e293b, #020617);
     display: flex;
     justify-content: center;

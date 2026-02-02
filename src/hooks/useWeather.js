@@ -120,6 +120,7 @@ export const useWeather = () => {
         tempFeels: Math.round(data.main.feels_like),
         tempHigh: Math.round(data.main.temp_max),
         tempLow: Math.round(data.main.temp_min),
+        mainCondition: data.weather[0].main === 'Clear' ? 'Sunny' : data.weather[0].main,
         condition: data.weather[0].description,
         icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
         humidity: data.main.humidity,
@@ -130,6 +131,18 @@ export const useWeather = () => {
     const processWttrData = (data, city, country) => {
         const current = data.current_condition[0];
         const forecast = data.weather[0];
+
+        // Map wttr.in description to Elite Categories
+        const desc = current.weatherDesc[0].value.toLowerCase();
+        let main = "Sunny"; // Default to Sunny for clearish days
+
+        if (desc.includes("cloud") || desc.includes("overcast")) main = "Clouds";
+        if (desc.includes("rain") || desc.includes("drizzle") || desc.includes("shower")) main = "Rain";
+        if (desc.includes("thunder")) main = "Thunderstorm";
+        if (desc.includes("snow") || desc.includes("ice")) main = "Snow";
+        if (desc.includes("mist") || desc.includes("fog") || desc.includes("haze")) main = "Mist";
+        if (desc.includes("clear") || desc.includes("sun")) main = "Sunny";
+
         return {
             name: city,
             country: country,
@@ -138,6 +151,7 @@ export const useWeather = () => {
             tempFeels: parseInt(current.FeelsLikeC),
             tempHigh: parseInt(forecast.maxtempC),
             tempLow: parseInt(forecast.mintempC),
+            mainCondition: main,
             condition: current.weatherDesc[0].value,
             icon: `https://openweathermap.org/img/wn/02d@2x.png`,
             humidity: current.humidity,
