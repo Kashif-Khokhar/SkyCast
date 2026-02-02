@@ -12,7 +12,7 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedCity, setSelectedCity] = useState('')
 
-  const { countryData, status: globalStatus } = useCountries()
+  const { countryData, status: globalStatus, isCitiesSyncing, syncCities } = useCountries()
   const { weatherData, status: weatherStatus, isSyncing, fetchWeather, clearWeather } = useWeather()
 
   const [currentDate] = useState(() => new Date().toLocaleDateString('en-US', {
@@ -20,9 +20,11 @@ function App() {
   }))
 
   const handleCountryChange = (e) => {
-    setSelectedCountry(e.target.value)
+    const country = e.target.value
+    setSelectedCountry(country)
     setSelectedCity('')
     clearWeather()
+    syncCities(country)
   }
 
   const handleCityChange = (e) => {
@@ -54,6 +56,7 @@ function App() {
             countryData={countryData}
             selectedCity={selectedCity}
             handleCityChange={handleCityChange}
+            isCitiesSyncing={isCitiesSyncing}
           />
 
           <div className="relative">
