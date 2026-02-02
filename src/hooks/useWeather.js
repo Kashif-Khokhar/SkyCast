@@ -51,6 +51,14 @@ export const useWeather = () => {
             return processWeatherData(data, city, country);
         };
 
+        const owmNameFetch = async () => {
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},${encodeURIComponent(country)}&units=metric&appid=${API_KEY}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("OWM Name Fetch Failed");
+            const data = await res.json();
+            return processWeatherData(data, city, country);
+        };
+
         const wttrFetch = async (coords) => {
             const query = coords ? `${coords.lat},${coords.lon}` : `${city},${country}`;
             const url = `https://wttr.in/${encodeURIComponent(query)}?format=j1`;
@@ -67,6 +75,7 @@ export const useWeather = () => {
 
             // 1. FAST PATH: Immediate name-based fetch (⚡ Speed focus)
             raceTargets.push(wttrFetch(null));
+            raceTargets.push(owmNameFetch());
 
             // 2. DEEP PATH: Geocode then coordinate-fetch (🎯 Accuracy focus)
             const deepAccuracy = async () => {
